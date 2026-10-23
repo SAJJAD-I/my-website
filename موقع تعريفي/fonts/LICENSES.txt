@@ -1,0 +1,17 @@
+Fonts in this folder
+
+In use:
+- pixelae-regular.ttf, pixelae-bold.ttf: Pixel AE by Ahmed Essam (Essssam), https://essssam.itch.io/pixel-ae
+  Creative Commons Zero v1.0 Universal (public domain; free for personal and commercial use).
+  Used for the Arabic lettering in the windows, at its native 10px.
+- kufi-arabic.woff2: Noto Kufi Arabic (variable weight), Google Fonts. SIL Open Font License 1.1.
+  Used for the lettering inside the pictures, and as a fallback.
+- silkscreen.woff2: Silkscreen by Jason Kottke, Google Fonts. SIL Open Font License 1.1. Used for Latin.
+
+Tried and kept for later (not loaded by the site), in candidates/:
+- Sorena (Pixel and Normal) by Mohammad Darvishi, https://github.com/MDarvishi5124/Sorena. SIL OFL 1.1 (Sorena-OFL.txt).
+- Unixel by Mohammad Darvishi, https://github.com/MDarvishi5124/Unixel. SIL OFL 1.1 (Unixel-OFL.txt).
+- Rooyin by Mohammad Darvishi, https://github.com/MDarvishi5124/Rooyin-for-Minecraft. GNU GPL v3 (Rooyin-LICENSE.txt),
+  a Minecraft font pack; check the GPL terms before using it on the site.
+
+The site rasterises these faces onto a pixel grid in the browser; the font files themselves are unmodified.

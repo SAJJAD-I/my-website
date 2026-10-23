@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>اسمك هنا</title>
+<meta name="description" content="حارة صغيرة بليلة ممطرة: مقهى، وبيتي، ومسجد، وحساباتي على لوح الطباشير.">
+<meta name="theme-color" content="#07060c">
+<link rel="preload" href="fonts/pixelae-regular.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="preload" href="fonts/pixelae-bold.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="preload" href="fonts/kufi-arabic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/silkscreen.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/xp.css">
+</head>
+<body>
+<div id="preload" aria-hidden="true"><div class="pl-box"><b class="pl-title">LOADING</b><span class="pl-bar"><i></i></span><small class="pl-step">fonts · sounds · world</small></div></div>
+<h1 class="sr" id="siteName">اسمك هنا</h1>
+
+<canvas id="scene" aria-hidden="true"></canvas>
+<canvas id="inner" aria-hidden="true" hidden></canvas>
+
+<div id="ui">
+  <!-- doors on the street move with the camera; their plaques are drawn in the picture -->
+  <div id="world">
+    <button id="houseDoor" class="hit" type="button"></button>
+    <button id="door" class="hit" type="button"></button>
+    <button id="mosqueDoor" class="hit" type="button"></button>
+  </div>
+
+  <nav id="board" aria-labelledby="boardTitle">
+    <span class="sr" id="boardTitle"></span>
+    <ul id="links"></ul>
+  </nav>
+
+  <button id="panL" class="pan" type="button" hidden><svg viewBox="0 0 7 7" shape-rendering="crispEdges" aria-hidden="true"><path d="M4 1h1v1H4zM3 2h1v1H3zM2 3h1v1H2zM3 4h1v1H3zM4 5h1v1H4z"/></svg></button>
+  <button id="panR" class="pan" type="button" hidden><svg viewBox="0 0 7 7" shape-rendering="crispEdges" aria-hidden="true"><path d="M2 1h1v1H2zM3 2h1v1H3zM4 3h1v1H4zM3 4h1v1H3zM2 5h1v1H2z"/></svg></button>
+
+  <!-- inside a building: touchable things, a hint, and the way out -->
+  <div id="inside" hidden>
+    <div id="spots"></div>
+    <p id="sceneHint" class="scene-hint"></p>
+    <button id="sceneExit" class="sign exit" type="button"></button>
+  </div>
+
+  <div id="corner">
+    <button id="sound" class="sign" type="button" aria-pressed="true">
+      <svg class="on" viewBox="0 0 9 9" shape-rendering="crispEdges" aria-hidden="true"><path d="M1 3h2v3H1zM3 2h1v5H3zM4 1h1v7H4zM6 3h1v1H6zM6 5h1v1H6zM7 2h1v1H7zM7 6h1v1H7zM8 3h1v3H8z"/></svg>
+      <svg class="off" viewBox="0 0 9 9" shape-rendering="crispEdges" aria-hidden="true"><path d="M1 3h2v3H1zM3 2h1v5H3zM4 1h1v7H4zM6 3h1v1H6zM8 3h1v1H8zM7 4h1v1H7zM6 5h1v1H6zM8 5h1v1H8z"/></svg>
+    </button>
+    <button id="lang" class="sign" type="button"></button>
+  </div>
+</div>
+
+<section id="bio" class="win b" role="dialog" aria-labelledby="bioTitle" hidden>
+  <header class="win-bar">
+    <span class="win-btns">
+      <button class="win-btn close" type="button"><svg viewBox="0 0 7 7" shape-rendering="crispEdges" aria-hidden="true"><path d="M1 1h1v1h1v1h1V2h1V1h1v1H5v1H4v1h1v1h1v1H5V5H4V4H3v1H2v1H1V5h1V4h1V3H2V2H1z"/></svg></button>
+      <span class="win-btn" aria-hidden="true"><svg viewBox="0 0 7 7" shape-rendering="crispEdges"><path d="M1 1h5v5H1zM2 2v3h3V2z" fill-rule="evenodd"/></svg></span>
+      <span class="win-btn" aria-hidden="true"><svg viewBox="0 0 7 7" shape-rendering="crispEdges"><rect x="1" y="5" width="5" height="1"/></svg></span>
+    </span>
+    <span class="win-title" id="bioTitle"></span>
+  </header>
+  <div class="win-body">
+    <h2 id="bioName"></h2>
+    <div id="bioText"></div>
+    <p class="win-foot" id="bioFoot"></p>
+  </div>
+</section>
+
+<section id="note" class="win a v-pink win-note" role="status" aria-live="polite" hidden>
+  <header class="win-bar"><span class="win-btns"><span class="win-btn close" aria-hidden="true"><svg viewBox="0 0 7 7" shape-rendering="crispEdges"><path d="M1 1h1v1h1v1h1V2h1V1h1v1H5v1H4v1h1v1h1v1H5V5H4V4H3v1H2v1H1V5h1V4h1V3H2V2H1z"/></svg></span><span class="win-btn" aria-hidden="true"><svg viewBox="0 0 7 7" shape-rendering="crispEdges"><path d="M1 1h5v5H1zM2 2v3h3V2z" fill-rule="evenodd"/></svg></span><span class="win-btn" aria-hidden="true"><svg viewBox="0 0 7 7" shape-rendering="crispEdges"><rect x="1" y="5" width="5" height="1"/></svg></span></span><span class="win-title" id="noteTitle"></span><span class="win-ico" id="noteIco"></span></header>
+  <div class="win-body"><p id="noteBody"></p></div>
+</section>
+
+<div id="fade" aria-hidden="true"></div>
+
+<noscript><p class="nojs">هذا الموقع يحتاج JavaScript حتى يشتغل.</p></noscript>
+
+<script src="js/content.js"></script>
+<script src="js/data/adhkar.js"></script>
+<script src="js/data/duas.js"></script>
+<script src="js/sound.js"></script>
+<script src="js/prayer.js"></script>
+<script src="js/pixtext.js"></script>
+<script src="js/scene.js"></script>
+<script src="js/xp.js"></script>
+<script src="js/room.js"></script>
+<script src="js/mosque.js"></script>
+<script src="js/cafe.js"></script>
+</body>
+</html>
